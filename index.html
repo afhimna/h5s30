@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFHIMNA</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: "KFGQPC Uthman Taha Naskh Regular", "Times New Roman", Arial, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #333;
+            padding: 20px 0;
+            font-size: 1.5em;
+            z-index: 2;
+        }
+
+        h3 {
+            font-family: "KFGQPC Uthman Taha Naskh Regular", "Times New Roman", Arial, sans-serif;
+            color: #ffffff;
+        }
+
+        .answer-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            align-items: center;
+        }
+
+        .answer-buttons button {
+            padding: 10px 30px;
+            font-size: 1em;
+            background-color: #333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            min-width: 200px;
+            font-family: "KFGQPC Uthman Taha Naskh Regular", "Times New Roman", Arial, sans-serif;
+        }
+
+        .answer-buttons button:hover {
+            background-color: #A9A9A9;
+        }
+
+        .answer-explanation {
+            text-align: left;
+            background-color: #ffd700;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .result-correct {
+            background-color: #008000;
+            animation: blink 1s 2;
+        }
+
+        .result-incorrect {
+            background-color: #cc0000;
+            animation: blink 1s 2;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .container {
+                width: 90%;
+                font-size: 0.9em;
+            }
+
+            .answer-buttons button {
+                min-width: 150px;
+            }
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 70%;
+            max-width: 600px;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.0);
+            border-radius: 10px;
+            z-index: 1;
+            font-family: "KFGQPC Uthman Taha Naskh Regular", "Times New Roman", Arial, sans-serif;
+            color: #ffffff;
+            font-size: 1.em;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 10px;
+            z-index: 10;
+        }
+
+        .button-container a {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .button-container button {
+            padding: 10px 30px;
+            font-size: 1em;
+            background-color: #333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            min-width: 1px;
+            font-family: "KFGQPC Uthman Taha Naskh Regular", "Times New Roman", Arial, sans-serif;
+        }
+
+        .button-container button:hover {
+            background-color: #A9A9A9;
+        }
+    </style>
+</head>
+<body>
+<div id="particles-js"></div>
+
+<div class="container">
+    <div>
+        <p>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    </div>
+
+    <h3>Pertanyaan 30: Siapa nama asli al imam jalaluddin al mahalli?</h3>
+    <div class="answer-buttons">
+        <button type="button" id="answer1A" onclick="checkAnswer('A')">A. أَحْمَد بْن مُحَمَّد الْمَحَلِّيّ‎</button>
+        <button type="button" id="answer1B" onclick="checkAnswer('B')">B. عَلِيّ‏ بْن أَحْمَد الْمَحَلِّيّ‎</button>
+        <button type="button" id="answer1C" onclick="checkAnswer('C')">C. أَحْمَد بْن عَلِيّ‏ الْمَحَلِّيّ‎</button>
+        <button type="button" id="answer1D" onclick="checkAnswer('D')">D. مُحَمَّد بْن عَلِيّ‏ الْمَحَلِّيّ‎</button>
+        <button type="button" id="answer1E" onclick="checkAnswer('E')">E. مُحَمَّد بْن أَحْمَد الْمَحَلِّيّ‎</button>
+    </div>
+    <div id="result1" style="display: none; text-align: center;"></div>
+</div>
+
+<div class="button-container">
+    <div style="position: fixed; bottom: 30px; right: 30px;">
+        <a href="https://afhimna.github.io/home/">
+            <button>Lanjut</button>
+        </a>
+    </div>
+
+    <div style="position: fixed; bottom: 30px; left: 30px;">
+        <a href="https://afhimna.github.io/h5s29/">
+            <button>Kembali</button>
+        </a>
+    </div>
+</div>
+
+<script>
+    particlesJS('particles-js', {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+
+    function checkAnswer(selectedAnswer) {
+        var correctAnswer = "E";
+        var resultDiv = document.getElementById("result1");
+
+        if (selectedAnswer === correctAnswer) {
+            var correctAnswerHTML = "<p class='result-correct'><strong>Jawaban:</strong> Benar!</p>";
+            correctAnswerHTML += "<div class='answer-explanation'><p>Syaikh Muhammad bin Ahmad bin Muhammad bin Ibrohim Al Mahalli lahir pada tahun 791 H dan mahir di beberapa disiplin ilmu: fiqh, kalam, ushul, nahwu, manthiq dan lain-lain, salah satu karyanya adalah: kanz ar roghibin syar minhaj ath tholibin, al badr ath thali' syarh jam'u al jawami, tafsir jalalain dan lain-lain. beliau wafat pada hari pertama tahun 864 H, رحمه الله تعالى.</p></div>";
+            resultDiv.innerHTML = correctAnswerHTML;
+            resultDiv.classList.remove('result-incorrect');
+        } else {
+            var incorrectAnswerHTML = "<p class='result-incorrect'><strong>Jawaban:</strong> Salah.</p>";
+            resultDiv.innerHTML = incorrectAnswerHTML;
+            resultDiv.classList.add('result-incorrect');
+        }
+
+        resultDiv.style.display = "block";
+    }
+</script>
+</body>
+</html>
